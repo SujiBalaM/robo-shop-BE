@@ -1,33 +1,45 @@
-import { CartEntity } from "src/cart/cart.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ApiProperty } from '@nestjs/swagger';
+import { CartEntity } from 'src/cart/cart.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Product {
-    @PrimaryGeneratedColumn()
-    id:number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name:string;
+  @ApiProperty()
+  @Column()
+  name: string;
 
-    @Column({nullable:true})
-    description:string;
-    @Column()
-    imageurl: string;
+  @ApiProperty()
+  @Column({ nullable: true })
+  description: string;
 
-    @Column()
-    category: string;
-    @Column()
-    price: number;
-    @Column()
-    discount: number;
+  @ApiProperty()
+  @Column()
+  imageurl: string;
 
-    @CreateDateColumn({type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP'})
-    createdDate:Date;
+  @ApiProperty()
+  @Column()
+  category: string;
 
-    @UpdateDateColumn({type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP'})
-    updatedDate:Date;
+  @ApiProperty()
+  @Column()
+  price: number;
 
-    // @OneToMany(() => CartEntity,(cart) => cart.products )
-    // cart:CartEntity[]
+  @ApiProperty()
+  @Column()
+  discount: number;
 
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  createdDate: Date;
+
+  @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  updatedDate: Date;
 }
