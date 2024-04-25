@@ -9,7 +9,6 @@ import { CartEntity } from './cart/cart.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -20,10 +19,14 @@ import { AuthModule } from './auth/auth.module';
       password: 'Bala@123',
       database: 'roboshop',
       // autoLoadEntities:true,
-      entities: [Product,CartEntity],
+      entities: [Product, CartEntity],
       synchronize: true,
-    }),ProductModule,CartModule, UsersModule, AuthModule
-
+      logging: true,
+    }),
+    ProductModule,
+    CartModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
