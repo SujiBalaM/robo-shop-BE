@@ -10,6 +10,7 @@ import {
 import { CartService } from './cart.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { Product } from 'src/product/product.entity';
+import { UpdateProductDto } from 'src/product/dto/update-product.dto';
 
 @Controller('cart')
 export class CartController {
