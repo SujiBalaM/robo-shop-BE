@@ -18,7 +18,6 @@ import { AuthModule } from './auth/auth.module';
       username: 'balasubramaniyam',
       password: 'Bala@123',
       database: 'roboshop',
-      // autoLoadEntities:true,
       entities: [Product, CartEntity],
       synchronize: true,
       logging: true,
