@@ -1,22 +1,23 @@
 import {
-  BaseEntity,
   PrimaryGeneratedColumn,
   Entity,
   Column,
-  Unique,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 @Entity()
-@Unique(['email'])
-export class User extends BaseEntity {
+export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   username: string;
 
-  @Column()
+  @Column({
+    unique: true,
+  })
   email: string;
 
   @Column()
@@ -25,7 +26,13 @@ export class User extends BaseEntity {
   @Column()
   salt: string;
 
-  async validatePassword(password: string): Promise<Boolean> {
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  createdDate: Date;
+
+  @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+  updatedDate: Date;
+
+  async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
     return hash === this.password;
   }

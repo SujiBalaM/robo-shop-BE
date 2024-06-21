@@ -23,16 +23,26 @@ export class UsersService {
 
   async create(signUpDto: SignUpDto): Promise<User> {
     const { email, username, password } = signUpDto;
-    const user = new User();
+    // const user = new User();
 
-    user.salt = await bcrypt.genSalt();
-    user.password = await this.hashPassword(password, user.salt);
-    user.email = email;
-    user.username = username;
+    // user.salt = await bcrypt.genSalt();
+    // user.password = await this.hashPassword(password, user.salt);
+    // user.email = email;
+    // user.username = username;
+
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await this.hashPassword(password, salt);
+
+    const user = {
+      salt,
+      password: hashedPassword,
+      email,
+      username,
+    };
 
     try {
-      await user.save();
-      return user;
+      const result = await this.userRepository.save(user);
+      return result;
     } catch (error) {
       throw error;
     }

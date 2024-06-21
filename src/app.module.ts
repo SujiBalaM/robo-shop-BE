@@ -8,6 +8,7 @@ import { CartModule } from './cart/cart.module';
 import { CartEntity } from './cart/cart.entity';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { User } from './users/user.entity';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
       username: 'harish',
       password: 'Copper@1993@',
       database: 'roboshop',
-      entities: [Product, CartEntity],
+      entities: [Product, CartEntity, User],
       synchronize: true,
       logging: true,
     }),
